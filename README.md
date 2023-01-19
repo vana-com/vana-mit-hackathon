@@ -32,8 +32,15 @@ New to git? New to node? That's okay -- we are all here to learn. Follow these m
 
 ## Step 1 - Create a fork
 
-![](./assets/readme/1.jpeg)
-![](./assets/readme/2.jpeg)
+
+Click `Fork` in the top right of this repo
+![](./assets/readme/fork-me.png)
+
+Keep the defaults and click `Create Fork`
+![](./assets/readme/create-fork.png)
+
+You should see a new repo, under your account name, and with the words `forked from`
+![](./assets/readme/my-fork.png)
 
 ## Step 2 - Add team members
 Be sure to add your team members so they can contribute
@@ -80,6 +87,5 @@ Take a look at the [Vana API Documentation](https://vana.gitbook.io/api/) on how
 
 
 # Ready for the world to see it?
-The easiest way to deploy your Next.js app to the internet is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app to the internet is to use the [Vercel Platform](https://vercel.com/new) from the creators of Next.js.
 
-To deploy the Demo app, you would need to [configure your project](https://vercel.com/new/clone?project-name=vana-portrait-demo&repository-name=vana-portrait-demo&repository-url=https%3A%2F%2Fgithub.com%2Fvana%2Fvana-portrait-demo).
