@@ -4,37 +4,12 @@ import styles from "styles/Home.module.css";
 import Generator from "components/Generator";
 import { VanaLogo } from "components/icons/VanaLogo";
 import { GithubIcon } from "components/icons/GithubIcon";
-import { vanaGet } from "vanaApi";
+import { vanaApiGet } from "vanaApi";
 import { LoggedIn } from "components/auth/LoggedIn";
 
 /**
- * The entry point for the demo app
- * It contains the state management for the app flow.
+ * Main text-to-image component, user is logged in at this point
  */
-export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>Vana Boilerplate</title>
-        <meta name="description" content="Generate portraits with Vana" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <header className={styles.header}>
-        <VanaLogo />
-        <a href="https://github.com/corsali/vana-portrait-demo" target="_blank">
-          <GithubIcon />
-        </a>
-      </header>
-      <main className={styles.main}>
-        <LoggedIn>
-          <TextToImage />
-        </LoggedIn>
-      </main>
-    </>
-  );
-}
-
 const TextToImage = () => {
   const authToken = localStorage.getItem("authToken");
   const [user, setUser] = useState({ balance: 0, exhibits: {} });
@@ -42,9 +17,9 @@ const TextToImage = () => {
   const refreshUser = async () => {
     if (authToken) {
       const [exhibitsPromise, textToImagePromise, balancePromise] = [
-        vanaGet("account/exhibits", {}, authToken),
-        vanaGet("account/exhibits/text-to-image", {}, authToken),
-        vanaGet("account/balance", {}, authToken),
+        vanaApiGet("account/exhibits", authToken),
+        vanaApiGet("account/exhibits/text-to-image", authToken),
+        vanaApiGet("account/balance", authToken),
       ];
 
       const [exhibitsResponse, textToImageResponse, balanceResponse] =
@@ -108,3 +83,34 @@ const TextToImage = () => {
     </div>
   );
 };
+
+/**
+ * The entry point for the demo app
+ * It contains the state management for the app flow.
+ */
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>Vana Boilerplate</title>
+        <meta name="description" content="Generate portraits with Vana" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <header className={styles.header}>
+        <VanaLogo />
+        <a
+          href="https://github.com/vana-com/vana-mit-hackathon"
+          target="_blank"
+        >
+          <GithubIcon />
+        </a>
+      </header>
+      <main className={styles.main}>
+        <LoggedIn>
+          <TextToImage />
+        </LoggedIn>
+      </main>
+    </>
+  );
+}

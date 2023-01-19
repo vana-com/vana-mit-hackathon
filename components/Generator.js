@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { vanaPost } from "vanaApi";
+import { vanaApiPost } from "vanaApi";
 
 const meRegex = /\bme\b/i;
 
@@ -14,7 +14,7 @@ const Generator = ({ authToken }) => {
     setIsLoading(true);
 
     try {
-      await vanaPost(
+      await vanaApiPost(
         `jobs/text-to-image`,
         {
           prompt: prompt.replace(meRegex, "{target_token}"),

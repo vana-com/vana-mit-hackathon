@@ -4,7 +4,7 @@ import { PromptCode } from "components/auth/forms/PromptCode";
 import { PromptLogin } from "components/auth/forms/PromptLogin";
 import * as jose from "jose";
 import styles from "styles/Home.module.css";
-import { vanaPost } from "vanaApi";
+import { vanaApiPost } from "vanaApi";
 
 /**
  * Renders a login form if not logged in,
@@ -53,7 +53,7 @@ export const LoggedIn = ({ children }) => {
     setLoading(true);
 
     try {
-      await vanaPost("auth/create-login", {
+      await vanaApiPost("auth/create-login", {
         email,
       });
       setLoginState("promptCode");
@@ -67,7 +67,7 @@ export const LoggedIn = ({ children }) => {
   const logIn = async (code) => {
     try {
       setLoading(true);
-      const { token } = await vanaPost("auth/login", {
+      const { token } = await vanaApiPost("auth/login", {
         email,
         code,
       });

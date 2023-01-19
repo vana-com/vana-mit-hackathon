@@ -1,6 +1,9 @@
 import config from "./config";
 
-const vanaFetch = async (path, options = {}, token) => {
+/**
+ * Helper function to make Vana API calls
+ */
+const vanaApiFetch = async (path, options = {}, token) => {
   if (token) {
     options.headers = {
       ...options.headers,
@@ -9,7 +12,6 @@ const vanaFetch = async (path, options = {}, token) => {
   }
 
   const response = await fetch(`${config.VANA_API_URL}/${path}`, options);
-
   const data = await response.json();
 
   if (response.ok && data.success === true) {
@@ -19,8 +21,11 @@ const vanaFetch = async (path, options = {}, token) => {
   }
 };
 
-const post = async (path, body, token) =>
-  vanaFetch(
+/**
+ * Vana API POST request
+ */
+const vanaApiPost = async (path, body, token) =>
+  vanaApiFetch(
     path,
     {
       headers: {
@@ -32,4 +37,9 @@ const post = async (path, body, token) =>
     token
   );
 
-export { vanaFetch, vanaFetch as vanaGet, post as vanaPost };
+/**
+ * Vana API GET request
+ */
+const vanaApiGet = async (path, token) => vanaApiFetch(path, {}, token);
+
+export { vanaApiGet, vanaApiPost };
