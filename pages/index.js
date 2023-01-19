@@ -9,7 +9,8 @@ const meRegex = /\bme\b/i;
 
 export default function Home() {
   // Login State
-  const authToken = localStorage.getItem("authToken");
+  const authToken =
+    typeof window !== "undefined" ? localStorage.authToken : undefined;
   const [user, setUser] = useState({ balance: 0, exhibits: {} });
 
   // Text-to-Image State

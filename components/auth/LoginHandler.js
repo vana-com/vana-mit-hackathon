@@ -17,6 +17,8 @@ export const LoginHandler = ({ children, setUser }) => {
 
   // Refresh the user's details every minute
   useEffect(() => {
+    const authToken =
+      typeof window !== "undefined" ? localStorage.authToken : undefined;
     const refreshUserWithTimeout = async () => {
       const refreshUser = async () => {
         if (authToken) {
@@ -64,15 +66,15 @@ export const LoginHandler = ({ children, setUser }) => {
             if (isExpired) {
               console.warn("Cached JWT is expired, logging user out.");
             } else {
-              setAuthToken(savedToken);
+              localStorage.setItem("authToken", savedToken);
               setLoginState("loggedIn");
               return;
             }
           }
-          setAuthToken("");
+          localStorage.setItem("authToken", "");
         } catch (e) {
           console.error("Unable to decode auth token", e);
-          setAuthToken("");
+          localStorage.setItem("authToken", "");
         }
       }
     }
@@ -105,7 +107,7 @@ export const LoginHandler = ({ children, setUser }) => {
         code,
       });
 
-      setAuthToken(token);
+      localStorage.setItem("authToken", token);
       setLoginState("loggedIn");
       localStorage.setItem("authToken", token);
     } catch (error) {
