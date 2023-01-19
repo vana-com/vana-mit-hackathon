@@ -1,104 +1,63 @@
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import styles from "styles/Home.module.css";
-import Generator from "components/Generator";
-import { VanaLogo } from "components/icons/VanaLogo";
 import { GithubIcon } from "components/icons/GithubIcon";
-import { vanaApiGet } from "vanaApi";
-import { LoggedIn } from "components/auth/LoggedIn";
+import { vanaApiPost } from "vanaApi";
+import { LoginHandler } from "components/auth/LoginHandler";
 
+const meRegex = /\bme\b/i;
 /**
  * Main text-to-image component, user is logged in at this point
  */
-const TextToImage = () => {
+export default function Home() {
+  // Login State
   const authToken = localStorage.getItem("authToken");
-  const [user, setUser] = useState({ balance: 0, exhibits: {} });
+  const [user] = useState({ balance: 0, exhibits: {} });
 
-  const refreshUser = async () => {
-    if (authToken) {
-      const [exhibitsPromise, textToImagePromise, balancePromise] = [
-        vanaApiGet("account/exhibits", authToken),
-        vanaApiGet("account/exhibits/text-to-image", authToken),
-        vanaApiGet("account/balance", authToken),
-      ];
+  // Text-to-Image State
+  const [prompt, setPrompt] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-      const [exhibitsResponse, textToImageResponse, balanceResponse] =
-        await Promise.all([
-          exhibitsPromise,
-          textToImagePromise,
-          balancePromise,
-        ]);
-
-      const newUser = {
-        balance: balanceResponse.balance,
-        exhibits: exhibitsResponse.exhibits,
-        textToImage: textToImageResponse.urls,
-      };
-      setUser(newUser);
-    }
-  };
-
-  // Refresh the user's details every minute
-  useEffect(() => {
-    const refreshUserWithTimeout = async () => {
-      await refreshUser();
-      setTimeout(refreshUserWithTimeout, 60000);
-    };
-    refreshUserWithTimeout();
-
-    return () => clearTimeout(refreshUserWithTimeout);
-  }, []);
-
-  if (!user.exhibits.length) {
-    // The user doesn't have any exhibits, they likely don't have a trained model
-    return (
-      <>
-        <h1>Create your Vana Portrait</h1>
-        <section className={`${styles.content} space-y-3`}>
-          <p className="text-center">
-            It seems we don't have a model for you yet.
-          </p>
-          <button
-            type="submit"
-            onClick={() =>
-              window.open("https://portrait.vana.com/create", "_blank").focus()
-            }
-            className={styles.primaryButton}
-          >
-            Create Portrait on Vana
-          </button>
-        </section>
-      </>
+  if (authToken && !user.exhibits.length) {
+    console.log(
+      "Unfortunately, you haven't created a personalized Vana Portrait model yet. Go to https://portrait.vana.com/create to create one :)"
     );
   }
 
-  return (
-    <div>
-      <div style={{ color: "black" }}>Credit balance: {user?.balance ?? 0}</div>
+  const callTextToImageAPI = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
 
-      <Generator authToken={authToken} />
-      {user.textToImage?.map((image, i) => (
-        <img src={image} key={i} />
-      ))}
-    </div>
-  );
-};
+    try {
+      await vanaApiPost(
+        `jobs/text-to-image`,
+        {
+          prompt: prompt.replace(meRegex, "{target_token}"),
+          exhibit_name: "text-to-image",
+          n_samples: 10,
+          // The inference seed: A non-negative integer fixes inference so inference on the same
+          // (model, prompt) produces the same output
+          seed: -1,
+        },
+        authToken
+      );
+    } catch (error) {
+      setErrorMessage("An error occurred while generating the image");
+    }
 
-/**
- * The entry point for the demo app
- * It contains the state management for the app flow.
- */
-export default function Home() {
+    setIsLoading(false);
+  };
+
   return (
     <>
       <Head>
-        <title>Vana Boilerplate</title>
-        <meta name="description" content="Generate portraits with Vana" />
+        <title>Vana MIT Hackathon</title>
+        <meta name="description" content="Vana MIT Hackathon" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={styles.header}>
-        <VanaLogo />
         <a
           href="https://github.com/vana-com/vana-mit-hackathon"
           target="_blank"
@@ -107,9 +66,43 @@ export default function Home() {
         </a>
       </header>
       <main className={styles.main}>
-        <LoggedIn>
-          <TextToImage />
-        </LoggedIn>
+        <LoginHandler>
+          {user.exhibits.length && (
+            <div>
+              <div style={{ color: "black" }}>
+                Credit balance: {user?.balance ?? 0}
+              </div>
+
+              <form onSubmit={callTextToImageAPI}>
+                <label htmlFor="prompt-input">Prompt:</label>
+                <input
+                  id="prompt-input"
+                  type="text"
+                  placeholder="Me eating blue spaghetti"
+                  value={prompt}
+                  onChange={(event) => setPrompt(event.target.value)}
+                />
+                <button type="submit" disabled={!validPrompt}>
+                  Generate image
+                </button>
+              </form>
+              {isLoading && <p>Loading...</p>}
+              {errorMessage && <p>Error: {errorMessage}</p>}
+
+              <div>
+                <p>
+                  Tip: make sure to include word me in your prompt to include
+                  your face
+                </p>
+              </div>
+
+              {/** Show the images a user has created */}
+              {user.textToImage?.map((image, i) => (
+                <img src={image} key={i} />
+              ))}
+            </div>
+          )}
+        </LoginHandler>
       </main>
     </>
   );

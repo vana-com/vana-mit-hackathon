@@ -7,14 +7,47 @@ import styles from "styles/Home.module.css";
 import { vanaApiPost } from "vanaApi";
 
 /**
- * Renders a login form if not logged in,
- * Otherwise render its children
+ * This component abstracts login. Feel free to take a look but you can just ignore it in this
+ * hackathon
  */
-export const LoggedIn = ({ children }) => {
+export const LoginHandler = ({ children }) => {
   const [email, setEmail] = useState("");
-  const [authToken, setAuthToken] = useState("");
   const [loginState, setLoginState] = useState("initial"); // initial, promptEmail, promptCode, loggedIn
   const [loading, setLoading] = useState(false);
+
+  // Refresh the user's details every minute
+  useEffect(() => {
+    const refreshUserWithTimeout = async () => {
+      const refreshUser = async () => {
+        if (authToken) {
+          const [exhibitsPromise, textToImagePromise, balancePromise] = [
+            vanaGet("account/exhibits", {}, authToken),
+            vanaGet("account/exhibits/text-to-image", {}, authToken),
+            vanaGet("account/balance", {}, authToken),
+          ];
+
+          const [exhibitsResponse, textToImageResponse, balanceResponse] =
+            await Promise.all([
+              exhibitsPromise,
+              textToImagePromise,
+              balancePromise,
+            ]);
+
+          const newUser = {
+            balance: balanceResponse.balance,
+            exhibits: exhibitsResponse.exhibits,
+            textToImage: textToImageResponse.urls,
+          };
+          setUser(newUser);
+        }
+      };
+      await refreshUser();
+      setTimeout(refreshUserWithTimeout, 60000);
+    };
+    refreshUserWithTimeout();
+
+    return () => clearTimeout(refreshUserWithTimeout);
+  }, []);
 
   /**
    * Reads a cached JWT token from LocalStorage, and updates the state
