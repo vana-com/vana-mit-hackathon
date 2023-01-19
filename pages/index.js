@@ -6,13 +6,11 @@ import { vanaApiPost } from "vanaApi";
 import { LoginHandler } from "components/auth/LoginHandler";
 
 const meRegex = /\bme\b/i;
-/**
- * Main text-to-image component, user is logged in at this point
- */
+
 export default function Home() {
   // Login State
   const authToken = localStorage.getItem("authToken");
-  const [user] = useState({ balance: 0, exhibits: {} });
+  const [user, setUser] = useState({ balance: 0, exhibits: {} });
 
   // Text-to-Image State
   const [prompt, setPrompt] = useState("");
@@ -66,7 +64,7 @@ export default function Home() {
         </a>
       </header>
       <main className={styles.main}>
-        <LoginHandler>
+        <LoginHandler setUser={setUser}>
           {user.exhibits.length && (
             <div>
               <div style={{ color: "black" }}>

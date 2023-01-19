@@ -4,13 +4,13 @@ import { PromptCode } from "components/auth/forms/PromptCode";
 import { PromptLogin } from "components/auth/forms/PromptLogin";
 import * as jose from "jose";
 import styles from "styles/Home.module.css";
-import { vanaApiPost } from "vanaApi";
+import { vanaApiPost, vanaApiGet } from "vanaApi";
 
 /**
  * This component abstracts login. Feel free to take a look but you can just ignore it in this
  * hackathon
  */
-export const LoginHandler = ({ children }) => {
+export const LoginHandler = ({ children, setUser }) => {
   const [email, setEmail] = useState("");
   const [loginState, setLoginState] = useState("initial"); // initial, promptEmail, promptCode, loggedIn
   const [loading, setLoading] = useState(false);
@@ -21,9 +21,9 @@ export const LoginHandler = ({ children }) => {
       const refreshUser = async () => {
         if (authToken) {
           const [exhibitsPromise, textToImagePromise, balancePromise] = [
-            vanaGet("account/exhibits", {}, authToken),
-            vanaGet("account/exhibits/text-to-image", {}, authToken),
-            vanaGet("account/balance", {}, authToken),
+            vanaApiGet("account/exhibits", {}, authToken),
+            vanaApiGet("account/exhibits/text-to-image", {}, authToken),
+            vanaApiGet("account/balance", {}, authToken),
           ];
 
           const [exhibitsResponse, textToImageResponse, balanceResponse] =
