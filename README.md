@@ -12,17 +12,16 @@ This project requires the following tools:
 - [Node.js](https://nodejs.org/en/) - The JavaScript environment for server-side code.
 - [NPM](https://www.npmjs.com/) - A Node.js package manager used to install dependencies.
 
+# Quick Start
+
+1. Fork this repo - [Tutorial](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+2. 
+
+
 # Getting Started
 
-## Step 1 - Fork the repository
-![](./assets/readme/1.jpeg)
-![](./assets/readme/2.jpeg)
 
-## Step 2 - Add your team members
-![](./assets/readme/3.jpeg)
-![](./assets/readme/4.jpeg)
-
-## Step 3 - Clone the code into a fresh folder
+## Step 3 - Clone your fork
 
 ```
 git clone <your_fork_url>
@@ -57,8 +56,8 @@ The app will become available on `http://localhost:3000`
 
 ![](./assets/readme/homepage.png)
 
-## Deploy on Vercel
+# Ready for the world to see it? Deploy it on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app to the internet is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 To deploy the Demo app, you would need to [configure your project](https://vercel.com/new/clone?project-name=vana-portrait-demo&repository-name=vana-portrait-demo&repository-url=https%3A%2F%2Fgithub.com%2Fvana%2Fvana-portrait-demo).
