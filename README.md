@@ -1,25 +1,45 @@
 # Introduction
 
-This is a Demo app created as an example of using Vana API. It is the way to get started quickly on the new project using the Next.js environment.
+This is a demo app created as an example of using Vana API. It is the way to get started quickly on the new project using the Next.js environment.
 
 - [Vana API Documentation](https://vana.gitbook.io/api/) - The Vana API documentation
-- [Installation Guide](#installation-guide) - How to get started with a new app
 
-# Installation Guide
+
+New to git/npm and think it's a poekmon? [Start here](#quick-ish-start)
+
+Want to put your skills to the test? [Start here](#quick-start)
+
+
+# Prerequisites
 
 This project requires the following tools:
 
 - [Node.js](https://nodejs.org/en/) - The JavaScript environment for server-side code.
 - [NPM](https://www.npmjs.com/) - A Node.js package manager used to install dependencies.
 
-# Quick Start
+# Quick Start 
+
 
 1. Fork this repo - [Tutorial](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
-2. 
+2. Clone your fork: `git clone <your_fork_url>`
+3. Install dependencies: `npm install`
+4. Run app: `npm run dev`
+5. View your app at `http://localhost:3000` and start editing `pages/index.js`
 
+🎉 Woah there! Any faster and you would've broken the sound barrier. Spread that knowledge and help a fellow sloanie out
 
-# Getting Started
+# Quick-ish Start
 
+New to git? New to node? That's okay -- we are all here to learn. Follow these more in-depth instructions and feel free to ask a sloanie or the vana team for help
+
+## Step 1 - Create a fork
+
+![](./assets/readme/1.jpeg)
+![](./assets/readme/2.jpeg)
+
+## Step 2 - Add team members
+Be sure to add your team members so they can contribute
+![](./assets/readme/3.jpeg)
 
 ## Step 3 - Clone your fork
 
