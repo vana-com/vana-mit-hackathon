@@ -2,8 +2,6 @@
 
 This is a demo app created as an example of using Vana API. It is the way to get started quickly on the new project using the Next.js environment.
 
-- [Vana API Documentation](https://vana.gitbook.io/api/) - The Vana API documentation
-
 
 New to git/npm and think it's a poekmon? [Start here](#quick-ish-start)
 
@@ -26,7 +24,7 @@ This project requires the following tools:
 4. Run app: `npm run dev`
 5. View your app at `http://localhost:3000` and start editing `pages/index.js`
 
-🎉 Woah there! Any faster and you would've broken the sound barrier. Spread that knowledge and help a fellow sloanie out
+🎉 Woah there! Any faster and you would've broken the sound barrier. Spread that knowledge around and help a fellow sloanie out
 
 # Quick-ish Start
 
@@ -52,7 +50,7 @@ cd vana-mit-hackathon
 
 ## Step 4 - Install Dependencies
 
-Next, we need to install the project dependencies, which are listed in `package.json`.
+Next, we need to install the project dependencies, which are listed in `package.json`
 
 ```
 npm install
@@ -76,8 +74,12 @@ The app will become available on `http://localhost:3000`
 
 ![](./assets/readme/homepage.png)
 
-# Ready for the world to see it? Deploy it on Vercel
+# Vana API
 
+Take a look at the [Vana API Documentation](https://vana.gitbook.io/api/) on how to use our api and make your hackathon idea come to life
+
+
+# Ready for the world to see it?
 The easiest way to deploy your Next.js app to the internet is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 To deploy the Demo app, you would need to [configure your project](https://vercel.com/new/clone?project-name=vana-portrait-demo&repository-name=vana-portrait-demo&repository-url=https%3A%2F%2Fgithub.com%2Fvana%2Fvana-portrait-demo).
