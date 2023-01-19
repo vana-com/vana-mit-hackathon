@@ -1,0 +1,176 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 64px;
+}
+
+.center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.container {
+  max-width: var(--max-width);
+  padding-left: var(--space-2);
+  padding-right: var(--space-2);
+}
+
+.content {
+  width: 100%;
+}
+
+/* Vana styles */
+
+.main h1 {
+  font-size: var(--heading-size-1);
+}
+
+.field {
+  height: 48px;
+  border-radius: 4px;
+  font-size: inherit;
+}
+
+.input {
+  composes: field;
+  background-color: rgb(245, 245, 244);
+  padding-left: 1rem;
+  border: 2px solid transparent;
+  outline: none;
+  width: 100%;
+}
+
+.input:focus-visible,
+.input:focus {
+  border: 2px solid #d6d3d1;
+}
+
+.input::placeholder {
+  color: rgb(168 162 158);
+}
+
+.button {
+  composes: field;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid #fff;
+  background-color: #fff;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.button:hover {
+  background-color: rgb(236 236 236);
+}
+
+.primaryButton {
+  composes: button;
+  background-color: #000;
+  color: #fff;
+}
+
+.primaryButton:hover {
+  background-color: rgb(49, 49, 49);
+}
+
+.unstyledButton {
+  composes: button;
+}
+
+.description {
+  color: rgb(114, 114, 114);
+  font-size: var(--font-size-3);
+}
+
+.error {
+  margin-top: 24px;
+  color: rgb(239, 68, 68);
+  font-size: var(--font-size-3);
+  text-transform: lowercase;
+}
+
+.error:first-letter {
+  text-transform: uppercase;
+}
+
+.form {
+  position: relative;
+}
+
+.form button[type="submit"] {
+  height: 48px;
+  position: absolute;
+  top: 0;
+  width: unset;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  width: 100%;
+  padding: var(--space-4) var(--space-2);
+  background-color: #fff;
+  z-index: 1;
+  border-bottom: 1px solid rgb(245, 245, 244);
+}
+
+.logo {
+  background-color: rgb(245, 245, 244);
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.animateSpinner {
+  animation: rotation 2s infinite linear;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .main h1 {
+    font-size: var(--heading-size-2);
+  }
+  .center {
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+  }
+  .center::before {
+    transform: none;
+    height: 300px;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
