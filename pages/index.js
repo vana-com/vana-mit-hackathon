@@ -34,7 +34,7 @@ export default function Home() {
         {
           prompt: prompt.replace(meRegex, "{target_token}"),
           exhibit_name: "text-to-image",
-          n_samples: 10,
+          n_samples: 5,
           // The inference seed: A non-negative integer fixes inference so inference on the same
           // (model, prompt) produces the same output
           seed: -1,
@@ -81,9 +81,7 @@ export default function Home() {
                   value={prompt}
                   onChange={(event) => setPrompt(event.target.value)}
                 />
-                <button type="submit" disabled={!validPrompt}>
-                  Generate image
-                </button>
+                <button type="submit">Generate image</button>
               </form>
               {isLoading && <p>Loading...</p>}
               {errorMessage && <p>Error: {errorMessage}</p>}

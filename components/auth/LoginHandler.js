@@ -14,18 +14,18 @@ export const LoginHandler = ({ children, setUser }) => {
   const [email, setEmail] = useState("");
   const [loginState, setLoginState] = useState("initial"); // initial, promptEmail, promptCode, loggedIn
   const [loading, setLoading] = useState(false);
+  const authToken =
+    typeof window !== "undefined" ? localStorage.authToken : undefined;
 
   // Refresh the user's details every minute
   useEffect(() => {
-    const authToken =
-      typeof window !== "undefined" ? localStorage.authToken : undefined;
     const refreshUserWithTimeout = async () => {
       const refreshUser = async () => {
         if (authToken) {
           const [exhibitsPromise, textToImagePromise, balancePromise] = [
-            vanaApiGet("account/exhibits", {}, authToken),
-            vanaApiGet("account/exhibits/text-to-image", {}, authToken),
-            vanaApiGet("account/balance", {}, authToken),
+            vanaApiGet("account/exhibits", authToken),
+            vanaApiGet("account/exhibits/text-to-image", authToken),
+            vanaApiGet("account/balance", authToken),
           ];
 
           const [exhibitsResponse, textToImageResponse, balanceResponse] =
