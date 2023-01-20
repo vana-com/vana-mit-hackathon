@@ -1,4 +1,4 @@
-export const PromptLogin = ({ onSetLoginState }) => {
+export const StartLogin = ({ onSetLoginState }) => {
   return (
     <div className="content container">
       <h1>Vana Login</h1>
