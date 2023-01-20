@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { PromptEmail } from "components/auth/forms/PromptEmail";
-import { PromptCode } from "components/auth/forms/PromptCode";
-import { PromptLogin } from "components/auth/forms/PromptLogin";
+import { LoginEmailForm } from "components/auth/forms/LoginEmailForm";
+import { LoginCodeForm } from "components/auth/forms/LoginCodeForm";
+import { StartLogin } from "components/auth/forms/StartLogin";
 import * as jose from "jose";
 import { vanaApiPost, vanaApiGet } from "vanaApi";
 
@@ -119,11 +119,11 @@ export const LoginHandler = ({ children, setUser }) => {
   return (
     <>
       {loginState === "initial" && (
-        <PromptLogin onSetLoginState={setLoginState} />
+        <StartLogin onSetLoginState={setLoginState} />
       )}
 
       {loginState === "promptEmail" && (
-        <PromptEmail
+        <LoginEmailForm
           onGetCode={createLogin}
           onSetLoginState={setLoginState}
           loading={loading}
@@ -131,7 +131,7 @@ export const LoginHandler = ({ children, setUser }) => {
       )}
 
       {loginState === "promptCode" && (
-        <PromptCode
+        <LoginCodeForm
           onLogin={logIn}
           loading={loading}
           onSetLoginState={setLoginState}
