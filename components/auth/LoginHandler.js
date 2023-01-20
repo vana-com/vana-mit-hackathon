@@ -3,7 +3,6 @@ import { PromptEmail } from "components/auth/forms/PromptEmail";
 import { PromptCode } from "components/auth/forms/PromptCode";
 import { PromptLogin } from "components/auth/forms/PromptLogin";
 import * as jose from "jose";
-import styles from "styles/Home.module.css";
 import { vanaApiPost, vanaApiGet } from "vanaApi";
 
 /**
@@ -119,29 +118,27 @@ export const LoginHandler = ({ children, setUser }) => {
 
   return (
     <>
-      <div className={`${styles.center} ${styles.container} space-y-2`}>
-        {loginState === "initial" && (
-          <PromptLogin onSetLoginState={setLoginState} />
-        )}
+      {loginState === "initial" && (
+        <PromptLogin onSetLoginState={setLoginState} />
+      )}
 
-        {loginState === "promptEmail" && (
-          <PromptEmail
-            onGetCode={createLogin}
-            onSetLoginState={setLoginState}
-            loading={loading}
-          />
-        )}
+      {loginState === "promptEmail" && (
+        <PromptEmail
+          onGetCode={createLogin}
+          onSetLoginState={setLoginState}
+          loading={loading}
+        />
+      )}
 
-        {loginState === "promptCode" && (
-          <PromptCode
-            onLogin={logIn}
-            loading={loading}
-            onSetLoginState={setLoginState}
-          />
-        )}
+      {loginState === "promptCode" && (
+        <PromptCode
+          onLogin={logIn}
+          loading={loading}
+          onSetLoginState={setLoginState}
+        />
+      )}
 
-        {loginState === "loggedIn" && children}
-      </div>
+      {loginState === "loggedIn" && children}
     </>
   );
 };

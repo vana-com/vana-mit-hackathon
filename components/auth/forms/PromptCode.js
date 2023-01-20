@@ -1,5 +1,4 @@
 import { useState, useCallback } from "react";
-import styles from "styles/Home.module.css";
 
 export const PromptCode = ({ onLogin, onSetLoginState, loading }) => {
   const [input, setInput] = useState("");
@@ -19,13 +18,13 @@ export const PromptCode = ({ onLogin, onSetLoginState, loading }) => {
   return (
     <>
       <h1>Enter Verification Code</h1>
-      <section className={`${styles.content} space-y-4`}>
-        <form onSubmit={handleSubmit} className={styles.form}>
+      <section className="w-full space-y-4">
+        <form onSubmit={handleSubmit} className="form">
           <input
             type="text"
             name="code"
             placeholder="Enter 6 digit code"
-            className={styles.input}
+            className="field input"
             autoFocus={true}
             value={input}
             onInput={handleInput}
@@ -33,7 +32,7 @@ export const PromptCode = ({ onLogin, onSetLoginState, loading }) => {
           />
           <button type="submit">{loading ? "Sending…" : "Login"}</button>
         </form>
-        <p className={styles.description}>
+        <p className="description">
           <a onClick={() => onSetLoginState("promptEmail")} href="#">
             Back
           </a>

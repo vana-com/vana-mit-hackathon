@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Head from "next/head";
-import styles from "styles/Home.module.css";
 import { GithubIcon } from "components/icons/GithubIcon";
 import { vanaApiPost } from "vanaApi";
 import { LoginHandler } from "components/auth/LoginHandler";
@@ -56,7 +55,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className={styles.header}>
+      <header className="header">
         <a
           href="https://github.com/vana-com/vana-mit-hackathon"
           target="_blank"
@@ -64,39 +63,41 @@ export default function Home() {
           <GithubIcon />
         </a>
       </header>
-      <main className={styles.main}>
+      <main className="main">
         <LoginHandler setUser={setUser}>
           {user.exhibits.length && (
-            <div>
-              <div style={{ color: "black" }}>
-                Credit balance: {user?.balance ?? 0}
-              </div>
+            <div className="content container">
+              <div className="space-y-4">
+                <form onSubmit={callTextToImageAPI} class="promptForm">
+                  <label htmlFor="prompt-input">Prompt:</label>
+                  <input
+                    id="prompt-input"
+                    type="text"
+                    placeholder="Me eating blue spaghetti"
+                    value={prompt}
+                    onChange={(event) => setPrompt(event.target.value)}
+                  />
+                  <button type="submit">Generate image</button>
+                </form>
+                <div>Credit balance: {user?.balance ?? 0}</div>
 
-              <form onSubmit={callTextToImageAPI}>
-                <label htmlFor="prompt-input">Prompt:</label>
-                <input
-                  id="prompt-input"
-                  type="text"
-                  placeholder="Me eating blue spaghetti"
-                  value={prompt}
-                  onChange={(event) => setPrompt(event.target.value)}
-                />
-                <button type="submit">Generate image</button>
-              </form>
-              {isLoading && <p>Loading...</p>}
-              {errorMessage && <p>Error: {errorMessage}</p>}
+                {isLoading && <p>Loading...</p>}
+                {errorMessage && <p>Error: {errorMessage}</p>}
 
-              <div>
-                <p>
-                  Tip: make sure to include word me in your prompt to include
-                  your face
-                </p>
+                <div>
+                  <p>
+                    Tip: make sure to include the word "me" in your prompt to
+                    include your face
+                  </p>
+                </div>
               </div>
 
               {/** Show the images a user has created */}
-              {user.textToImage?.map((image, i) => (
-                <img src={image} key={i} />
-              ))}
+              <div className="pt-1 space-y-4">
+                {user.textToImage?.map((image, i) => (
+                  <img src={image} key={i} class="w-full" />
+                ))}
+              </div>
             </div>
           )}
         </LoginHandler>

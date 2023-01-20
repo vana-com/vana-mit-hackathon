@@ -31,6 +31,22 @@ body {
   font-size: var(--font-size-2);
 }
 
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
 a {
   color: inherit;
   text-decoration-line: underline;
@@ -59,19 +75,158 @@ a:hover {
   margin-top: var(--space-4);
 }
 
-.space-x-1 > :not([hidden]) ~ :not([hidden]) {
-  margin-right: var(--space-1);
-}
-.space-x-2 > :not([hidden]) ~ :not([hidden]) {
-  margin-right: var(--space-2);
-}
-.space-x-3 > :not([hidden]) ~ :not([hidden]) {
-  margin-right: var(--space-3);
-}
-.space-x-4 > :not([hidden]) ~ :not([hidden]) {
-  margin-right: var(--space-4);
+.pt-1 {
+  padding-top: var(--space-1);
 }
 
 .text-center {
   text-align: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* LAYOUT */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 64px;
+}
+
+.main h1 {
+  font-size: var(--heading-size-1);
+}
+
+.content {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  padding-left: var(--space-2);
+  padding-right: var(--space-2);
+}
+
+.header {
+  position: fixed;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: var(--space-4) var(--space-2);
+  z-index: 1;
+}
+
+.promptForm {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.promptForm input {
+  flex: 1;
+}
+
+@media (max-width: 700px) {
+  .main h1 {
+    font-size: var(--heading-size-2);
+  }
+  .center {
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+  }
+  .center::before {
+    transform: none;
+    height: 300px;
+  }
+}
+
+/* LOGIN FORMS */
+.form {
+  position: relative;
+}
+
+.form button[type="submit"] {
+  height: 48px;
+  position: absolute;
+  top: 0;
+  width: unset;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.field {
+  height: 48px;
+  border-radius: 4px;
+  font-size: inherit;
+}
+
+.input {
+  background-color: rgb(245, 245, 244);
+  padding-left: 1rem;
+  border: 2px solid transparent;
+  outline: none;
+  width: 100%;
+}
+
+.input:focus-visible,
+.input:focus {
+  border: 2px solid #d6d3d1;
+}
+
+.input::placeholder {
+  color: rgb(168 162 158);
+}
+
+.button {
+  composes: field;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid #fff;
+  background-color: #fff;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.button:hover {
+  background-color: rgb(236 236 236);
+}
+
+.primaryButton {
+  composes: button;
+  background-color: #000;
+  color: #fff;
+}
+
+.primaryButton:hover {
+  background-color: rgb(49, 49, 49);
+}
+
+.description {
+  color: rgb(114, 114, 114);
+  font-size: var(--font-size-3);
+}
+
+.error {
+  margin-top: 24px;
+  color: rgb(239, 68, 68);
+  font-size: var(--font-size-3);
+  text-transform: lowercase;
+}
+
+.error:first-letter {
+  text-transform: uppercase;
 }

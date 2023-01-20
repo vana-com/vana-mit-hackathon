@@ -1,17 +1,15 @@
-import styles from "styles/Home.module.css";
-
 export const PromptLogin = ({ onSetLoginState }) => {
   return (
     <>
       <h1>Vana Login</h1>
-      <section className={`${styles.content} space-y-4`}>
+      <section className="w-full space-y-4">
         <button
           onClick={() => onSetLoginState("promptEmail")}
-          className={styles.primaryButton}
+          className="field button primaryButton"
         >
           Login
         </button>
-        <p className={styles.description}>
+        <p className="description">
           New to Vana?{" "}
           <a target="_blank" href="https://portrait.vana.com/create">
             Create your Portrait

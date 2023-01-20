@@ -1,6 +1,5 @@
 import { useState, useCallback } from "react";
 import { ArrowIcon } from "components/icons/ArrowIcon";
-import styles from "styles/Home.module.css";
 
 export const PromptEmail = ({ onGetCode, onSetLoginState, loading }) => {
   const [input, setInput] = useState("");
@@ -20,14 +19,13 @@ export const PromptEmail = ({ onGetCode, onSetLoginState, loading }) => {
   return (
     <>
       <h1>Login with Vana</h1>
-      <section className={`${styles.content} space-y-4`}>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {/* Email: */}
+      <section className="w-full space-y-4">
+        <form onSubmit={handleSubmit} className="form">
           <input
             type="email"
             name="email"
             placeholder="Email address"
-            className={styles.input}
+            className="field input"
             autoFocus={true}
             disabled={loading}
             value={input}
@@ -35,7 +33,7 @@ export const PromptEmail = ({ onGetCode, onSetLoginState, loading }) => {
           />
           <button
             type="submit"
-            className={styles.unstyledButton}
+            className="button"
             disabled={loading}
           >
             {loading ? (
@@ -47,7 +45,7 @@ export const PromptEmail = ({ onGetCode, onSetLoginState, loading }) => {
             )}
           </button>
         </form>
-        <p className={styles.description}>
+        <p className="description">
           <a onClick={() => onSetLoginState("initial")} href="#">
             Back
           </a>
