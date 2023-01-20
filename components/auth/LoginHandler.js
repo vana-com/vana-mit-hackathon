@@ -11,7 +11,7 @@ import { vanaApiPost, vanaApiGet } from "vanaApi";
  */
 export const LoginHandler = ({ children, setUser }) => {
   const [email, setEmail] = useState("");
-  const [loginState, setLoginState] = useState("initial"); // initial, promptEmail, promptCode, loggedIn
+  const [loginState, setLoginState] = useState("initial"); // initial, emailInput, codeInput, loggedIn
   const [loading, setLoading] = useState(false);
   const authToken =
     typeof window !== "undefined" ? localStorage.authToken : undefined;
@@ -90,7 +90,7 @@ export const LoginHandler = ({ children, setUser }) => {
       await vanaApiPost("auth/create-login", {
         email,
       });
-      setLoginState("promptCode");
+      setLoginState("codeInput");
     } catch (error) {
       console.error("Unable to create log in code", error);
     } finally {
@@ -122,7 +122,7 @@ export const LoginHandler = ({ children, setUser }) => {
         <StartLogin onSetLoginState={setLoginState} />
       )}
 
-      {loginState === "promptEmail" && (
+      {loginState === "emailInput" && (
         <LoginEmailForm
           onGetCode={createLogin}
           onSetLoginState={setLoginState}
@@ -130,7 +130,7 @@ export const LoginHandler = ({ children, setUser }) => {
         />
       )}
 
-      {loginState === "promptCode" && (
+      {loginState === "codeInput" && (
         <LoginCodeForm
           onLogin={logIn}
           loading={loading}

@@ -4,7 +4,7 @@ export const StartLogin = ({ onSetLoginState }) => {
       <h1>Vana Login</h1>
       <section className="w-full space-y-4">
         <button
-          onClick={() => onSetLoginState("promptEmail")}
+          onClick={() => onSetLoginState("emailInput")}
           className="primaryButton w-full"
         >
           Login

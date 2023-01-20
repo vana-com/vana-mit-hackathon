@@ -32,7 +32,7 @@ export const LoginCodeForm = ({ onLogin, onSetLoginState, loading }) => {
           <button type="submit">{loading ? "Sending…" : "Login"}</button>
         </form>
         <p className="description">
-          <a onClick={() => onSetLoginState("promptEmail")} href="#">
+          <a onClick={() => onSetLoginState("emailInput")} href="#">
             Back
           </a>
         </p>
