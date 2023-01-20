@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-export const PromptEmail = ({ onGetCode, onSetLoginState, loading }) => {
+export const LoginEmailForm = ({ onGetCode, onSetLoginState, loading }) => {
   const [input, setInput] = useState("");
 
   const handleInput = useCallback((e) => {
