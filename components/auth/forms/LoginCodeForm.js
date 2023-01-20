@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-export const PromptCode = ({ onLogin, onSetLoginState, loading }) => {
+export const LoginCodeForm = ({ onLogin, onSetLoginState, loading }) => {
   const [input, setInput] = useState("");
 
   const handleInput = useCallback((e) => {
