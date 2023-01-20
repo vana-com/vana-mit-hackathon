@@ -69,7 +69,7 @@ export default function Home() {
             <div className="content container">
               <div className="space-y-4">
                 <label htmlFor="prompt-input">Prompt:</label>
-                <form onSubmit={callTextToImageAPI} class="promptForm">
+                <form onSubmit={callTextToImageAPI}>
                   <input
                     id="prompt-input"
                     type="text"

@@ -127,17 +127,6 @@ a:hover {
   z-index: 1;
 }
 
-.promptForm {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.promptForm input {
-  flex: 1;
-}
-
 @media (max-width: 700px) {
   .main h1 {
     font-size: var(--heading-size-2);
@@ -191,15 +180,6 @@ button {
   border: 1px solid currentColor;
   background-color: #fff;
 }
-
-/* button[type="submit"] {
-  position: absolute;
-  top: 0;
-  width: unset;
-  right: 16px;
-  background: none;
-  border: none;
-} */
 
 button:hover {
   background-color: rgb(236 236 236);
