@@ -1,5 +1,4 @@
 import { useState, useCallback } from "react";
-import { ArrowIcon } from "components/icons/ArrowIcon";
 
 export const PromptEmail = ({ onGetCode, onSetLoginState, loading }) => {
   const [input, setInput] = useState("");
@@ -17,15 +16,14 @@ export const PromptEmail = ({ onGetCode, onSetLoginState, loading }) => {
   );
 
   return (
-    <>
+    <div className="content container">
       <h1>Login with Vana</h1>
       <section className="w-full space-y-4">
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit} className="relative">
           <input
             type="email"
             name="email"
             placeholder="Email address"
-            className="field input"
             autoFocus={true}
             disabled={loading}
             value={input}
@@ -33,15 +31,12 @@ export const PromptEmail = ({ onGetCode, onSetLoginState, loading }) => {
           />
           <button
             type="submit"
-            className="button"
             disabled={loading}
           >
             {loading ? (
               "Sending…"
             ) : (
-              <>
-                Get code <ArrowIcon />
-              </>
+              "Get code"
             )}
           </button>
         </form>
@@ -51,6 +46,6 @@ export const PromptEmail = ({ onGetCode, onSetLoginState, loading }) => {
           </a>
         </p>
       </section>
-    </>
+    </div>
   );
 };

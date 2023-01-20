@@ -1,11 +1,11 @@
 export const PromptLogin = ({ onSetLoginState }) => {
   return (
-    <>
+    <div className="content container">
       <h1>Vana Login</h1>
       <section className="w-full space-y-4">
         <button
           onClick={() => onSetLoginState("promptEmail")}
-          className="field button primaryButton"
+          className="primaryButton w-full"
         >
           Login
         </button>
@@ -16,6 +16,6 @@ export const PromptLogin = ({ onSetLoginState }) => {
           </a>
         </p>
       </section>
-    </>
+    </div>
   );
 };

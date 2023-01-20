@@ -87,12 +87,15 @@ a:hover {
   width: 100%;
 }
 
+.relative {
+  position: relative;
+}
+
 /* LAYOUT */
 
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   min-height: 100vh;
   padding-top: 64px;
@@ -125,6 +128,7 @@ a:hover {
 }
 
 .promptForm {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -149,29 +153,20 @@ a:hover {
 }
 
 /* LOGIN FORMS */
-.form {
+form {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.form button[type="submit"] {
-  height: 48px;
-  position: absolute;
-  top: 0;
-  width: unset;
-  right: 16px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
+form input {
+  flex: 1;
 }
 
-.field {
+input {
   height: 48px;
-  border-radius: 4px;
   font-size: inherit;
-}
-
-.input {
   background-color: rgb(245, 245, 244);
   padding-left: 1rem;
   border: 2px solid transparent;
@@ -179,34 +174,38 @@ a:hover {
   width: 100%;
 }
 
-.input:focus-visible,
-.input:focus {
+input:focus-visible,
+input:focus {
   border: 2px solid #d6d3d1;
 }
 
-.input::placeholder {
+input::placeholder {
   color: rgb(168 162 158);
 }
 
-.button {
-  composes: field;
-  width: 100%;
+button {
+  height: 48px;
+  font-weight: bold;
+  padding: 0 var(--space-3);
   cursor: pointer;
-  border: 1px solid #fff;
+  border: 1px solid currentColor;
   background-color: #fff;
-  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
 }
 
-.button:hover {
+/* button[type="submit"] {
+  position: absolute;
+  top: 0;
+  width: unset;
+  right: 16px;
+  background: none;
+  border: none;
+} */
+
+button:hover {
   background-color: rgb(236 236 236);
 }
 
 .primaryButton {
-  composes: button;
   background-color: #000;
   color: #fff;
 }

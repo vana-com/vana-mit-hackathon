@@ -68,8 +68,8 @@ export default function Home() {
           {user.exhibits.length && (
             <div className="content container">
               <div className="space-y-4">
+                <label htmlFor="prompt-input">Prompt:</label>
                 <form onSubmit={callTextToImageAPI} class="promptForm">
-                  <label htmlFor="prompt-input">Prompt:</label>
                   <input
                     id="prompt-input"
                     type="text"

@@ -16,15 +16,14 @@ export const PromptCode = ({ onLogin, onSetLoginState, loading }) => {
   );
 
   return (
-    <>
+    <div className="content container">
       <h1>Enter Verification Code</h1>
       <section className="w-full space-y-4">
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit} className="relative">
           <input
             type="text"
             name="code"
             placeholder="Enter 6 digit code"
-            className="field input"
             autoFocus={true}
             value={input}
             onInput={handleInput}
@@ -38,6 +37,6 @@ export const PromptCode = ({ onLogin, onSetLoginState, loading }) => {
           </a>
         </p>
       </section>
-    </>
+    </div>
   );
 };
