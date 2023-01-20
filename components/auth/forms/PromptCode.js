@@ -1,4 +1,3 @@
-import { Spinner } from "components/icons/Spinner";
 import { useState, useCallback } from "react";
 import styles from "styles/Home.module.css";
 
@@ -32,7 +31,7 @@ export const PromptCode = ({ onLogin, onSetLoginState, loading }) => {
             onInput={handleInput}
             autoComplete="off"
           />
-          <button type="submit">{loading ? <Spinner /> : <>Login</>}</button>
+          <button type="submit">{loading ? "Sending…" : "Login"}</button>
         </form>
         <p className={styles.description}>
           <a onClick={() => onSetLoginState("promptEmail")} href="#">

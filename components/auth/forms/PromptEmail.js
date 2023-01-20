@@ -1,4 +1,3 @@
-import { Spinner } from "components/icons/Spinner";
 import { useState, useCallback } from "react";
 import { ArrowIcon } from "components/icons/ArrowIcon";
 import styles from "styles/Home.module.css";
@@ -40,7 +39,7 @@ export const PromptEmail = ({ onGetCode, onSetLoginState, loading }) => {
             disabled={loading}
           >
             {loading ? (
-              <Spinner />
+              "Sending…"
             ) : (
               <>
                 Get code <ArrowIcon />
