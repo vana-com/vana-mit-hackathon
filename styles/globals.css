@@ -1,0 +1,211 @@
+:root {
+  --max-width: 640px;
+  --space-1: 48px;
+  --space-2: 24px;
+  --space-3: 16px;
+  --space-4: 9px;
+  --heading-size-1: 44px;
+  --heading-size-2: 36px;
+  --heading-size-3: 24px;
+  --heading-size-4: 21px;
+  --font-size-1: 18px;
+  --font-size-2: 15px;
+  --font-size-3: 13px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: #fff;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-2);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 0.025em;
+  text-decoration-color: rgba(0, 0, 0, 0.3);
+}
+
+a:hover {
+  color: #000;
+  text-decoration-color: #000;
+}
+
+/* UTILITIES */
+
+.space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: var(--space-1);
+}
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: var(--space-2);
+}
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: var(--space-3);
+}
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: var(--space-4);
+}
+
+.pt-1 {
+  padding-top: var(--space-1);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.relative {
+  position: relative;
+}
+
+/* LAYOUT */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 64px;
+}
+
+.main h1 {
+  font-size: var(--heading-size-1);
+}
+
+.content {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  padding-left: var(--space-2);
+  padding-right: var(--space-2);
+}
+
+.header {
+  position: fixed;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: var(--space-4) var(--space-2);
+  z-index: 1;
+}
+
+@media (max-width: 700px) {
+  .main h1 {
+    font-size: var(--heading-size-2);
+  }
+  .center {
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+  }
+  .center::before {
+    transform: none;
+    height: 300px;
+  }
+}
+
+/* LOGIN FORMS */
+form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+form input {
+  flex: 1;
+}
+
+input {
+  height: 48px;
+  font-size: inherit;
+  background-color: rgb(245, 245, 244);
+  padding-left: 1rem;
+  border: 2px solid transparent;
+  outline: none;
+  width: 100%;
+}
+
+input:focus-visible,
+input:focus {
+  border: 2px solid #d6d3d1;
+}
+
+input::placeholder {
+  color: rgb(168 162 158);
+}
+
+button {
+  height: 48px;
+  font-weight: bold;
+  padding: 0 var(--space-3);
+  cursor: pointer;
+  border: 1px solid currentColor;
+  background-color: #fff;
+}
+
+button:hover {
+  background-color: rgb(236 236 236);
+}
+
+.primaryButton {
+  background-color: #000;
+  color: #fff;
+}
+
+.primaryButton:hover {
+  background-color: rgb(49, 49, 49);
+}
+
+.description {
+  color: rgb(114, 114, 114);
+  font-size: var(--font-size-3);
+}
+
+.error {
+  margin-top: 24px;
+  color: rgb(239, 68, 68);
+  font-size: var(--font-size-3);
+  text-transform: lowercase;
+}
+
+.error:first-letter {
+  text-transform: uppercase;
+}
