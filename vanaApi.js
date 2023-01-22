@@ -1,6 +1,30 @@
 import config from "./config";
 
 /**
+ * Call various Vana APIs and build and return a user object
+ */
+const getUser = async () => {
+  const authToken = localStorage?.authToken ?? undefined;
+  if (authToken) {
+    const [exhibitsPromise, textToImagePromise, balancePromise] = [
+      vanaApiGet("account/exhibits"),
+      vanaApiGet("account/exhibits/text-to-image"),
+      vanaApiGet("account/balance"),
+    ];
+
+    const [exhibitsResponse, textToImageResponse, balanceResponse] =
+      await Promise.all([exhibitsPromise, textToImagePromise, balancePromise]);
+
+    return {
+      balance: balanceResponse?.balance ?? 0,
+      exhibits: exhibitsResponse?.exhibits ?? [],
+      textToImage: textToImageResponse?.urls ?? [],
+    };
+  }
+  return null;
+};
+
+/**
  * Helper function to make Vana API calls
  */
 const vanaApiFetch = async (path, options = {}) => {
@@ -39,4 +63,4 @@ const vanaApiPost = async (path, body) =>
  */
 const vanaApiGet = async (path) => vanaApiFetch(path, {});
 
-export { vanaApiGet, vanaApiPost };
+export { getUser, vanaApiGet, vanaApiPost };
