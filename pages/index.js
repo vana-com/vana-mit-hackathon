@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { GithubIcon } from "components/icons/GithubIcon";
-import { vanaApiPost } from "vanaApi";
+import { getUser, vanaApiPost } from "vanaApi";
 import { LoginHandler } from "components/auth/LoginHandler";
 
 export default function Home() {
@@ -23,17 +23,17 @@ export default function Home() {
     setErrorMessage(null);
 
     try {
-      const response = await vanaApiPost(`images/generations`, {
+      await vanaApiPost(`images/generations`, {
         prompt: prompt.replace(/\bme\b/i, "{target_token}"), // Replace the word "me" with "{target_token}" in the prompt to include yourself in the picture
       });
 
-      // Append new images to user state
-      setUser({
-        ...user,
-        textToImage: [...response.data.map((d) => d.url), ...user.textToImage],
-      });
+      // Update user state (new images, balance, etc)
+      const user = await getUser();
+      if (user) {
+        setUser(user);
+      }
     } catch (error) {
-      console.error(error)
+      console.error(error);
       setErrorMessage("An error occurred while generating the image");
     }
 
