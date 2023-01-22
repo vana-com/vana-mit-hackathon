@@ -20,18 +20,20 @@ export default function Home() {
   const callTextToImageAPI = async (event) => {
     event.preventDefault();
     setIsLoading(true);
+    setErrorMessage(null);
 
     try {
-      await vanaApiPost(`jobs/text-to-image`, {
+      const response = await vanaApiPost(`images/generations`, {
         prompt: prompt.replace(/\bme\b/i, "{target_token}"), // Replace the word "me" with "{target_token}" in the prompt to include yourself in the picture
-        exhibit_name: "text-to-image", // How your images are grouped in your gallery. For this demo, all images will be grouped in the `text-to-image` exhibit
-        n_samples: 5,
-        seed: -1, // The inference seed: A non-negative integer fixes inference so inference on the same (model, prompt) produces the same output
       });
-      alert(
-        "Successfully submitted prompt. New images will appear in about 7 minutes."
-      );
+
+      // Append new images to user state
+      setUser({
+        ...user,
+        textToImage: [...response.data.map((d) => d.url), ...user.textToImage],
+      });
     } catch (error) {
+      console.error(error)
       setErrorMessage("An error occurred while generating the image");
     }
 
@@ -68,7 +70,9 @@ export default function Home() {
                     value={prompt}
                     onChange={(event) => setPrompt(event.target.value)}
                   />
-                  <button type="submit">Generate image</button>
+                  <button type="submit" disabled={isLoading}>
+                    Generate image
+                  </button>
                 </form>
                 <div>Credit balance: {user?.balance ?? 0}</div>
 

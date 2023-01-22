@@ -3,7 +3,7 @@ import { LoginEmailForm } from "components/auth/forms/LoginEmailForm";
 import { LoginCodeForm } from "components/auth/forms/LoginCodeForm";
 import { StartLogin } from "components/auth/forms/StartLogin";
 import * as jose from "jose";
-import { vanaApiPost, vanaApiGet } from "vanaApi";
+import { getUser, vanaApiPost } from "vanaApi";
 
 /**
  * This component abstracts login. Feel free to take a look but you can just ignore it in this
@@ -16,33 +16,14 @@ export const LoginHandler = ({ children, setUser }) => {
 
   const refreshUserWithTimeout = async () => {
     const refreshUser = async () => {
-      const authToken = localStorage?.authToken ?? undefined;
-      if (authToken) {
-        const [exhibitsPromise, textToImagePromise, balancePromise] = [
-          vanaApiGet("account/exhibits"),
-          vanaApiGet("account/exhibits/text-to-image"),
-          vanaApiGet("account/balance"),
-        ];
-
-        const [exhibitsResponse, textToImageResponse, balanceResponse] =
-          await Promise.all([
-            exhibitsPromise,
-            textToImagePromise,
-            balancePromise,
-          ]);
-
-        const newUser = {
-          balance: balanceResponse?.balance ?? 0,
-          exhibits: exhibitsResponse?.exhibits ?? [],
-          textToImage: textToImageResponse?.urls ?? [],
-        };
-
-        setUser(newUser);
+      const user = await getUser();
+      if (user) {
+        setUser(user);
         setLoginState("loggedIn");
       }
     };
     await refreshUser();
-    setTimeout(refreshUserWithTimeout, 60000);
+    setTimeout(refreshUserWithTimeout, 1200000);
   };
 
   // Refresh the user's details every minute
